@@ -1,0 +1,51 @@
+<html>
+<head>
+	<style>
+		#div1 {
+			
+			width: 100%;
+        }
+		
+	</style>
+	<script>
+		var toggle = 0;
+		function getData() {
+			const Http = new XMLHttpRequest();
+			const url = "https://restcountries.eu/rest/v2/all";
+			Http.open("GET", url, true);
+			Http.send();
+			Http.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200)
+					var myArr = JSON.parse(this.responseText);
+				myFunction(myArr);
+			}
+		}
+		function myFunction(arr) {
+            var dynamicDiv = document.createElement("div");
+                
+                dynamicDiv.setAttribute("style", "border : solid green")
+                dynamicDiv.innerHTML += "Country Name:" + arr[i].name + "<br>" + "Capital:" + " " + arr[i].capital + "<br>" + "Region: " + arr[i].region + "<br>" + "Population: " + JSON.stringify(arr[i].population) + "<br>" + "Currency: " + arr[i].currencies + "<br>" + "<br>";
+                
+                div1.append(dynamicDiv);
+            
+
+            // else if (toggle == 1) {
+            //     dynamicDiv.setAttribute("style", "border : solid blue")
+            //     dynamicDiv.innerHTML = arr[i].attr(‘src’, ‘get_image.php ? imageId =’ + someID); + "<br>" + "<br>" + "<br>";
+            //     toggle = 0;
+            //     div2.append(dynamicDiv);
+            // }
+        }
+        function deleteData() {
+        document.getElementById("div1").innerHTML = "";
+        document.getElementById("div2").innerHTML = "";
+    }</script>
+</head>
+<body>
+	<button id="btn" onclick="getData()">Request</button>
+	<button id="btn2" onclick="deleteData()">Delete</button>
+	<br /><br /><br />
+	<div id="div1"></div>
+	<div id="div2"></div>
+</body>
+</html>
